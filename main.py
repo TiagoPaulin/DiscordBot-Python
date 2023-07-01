@@ -1,8 +1,6 @@
 import discord
 from key import token #importa do meu diretorio o arquivo que contem o token do meu bot
-import requests
-import os
-import json
+# import requests
 import random
 
 intents = discord.Intents.default()
