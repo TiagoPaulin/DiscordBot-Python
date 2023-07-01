@@ -28,32 +28,23 @@ async def on_message(message):
     if message.author == client.user: #verificação para o bot responder somente mensagens de usuários
         return
 
-    # if message.content.lower() == "!gatinho": 
-    #     await message.channel.send(f'Oi {message.author}, ainda sem gatinhos')
-
-# comando para mandar uma imagem de gatinho aleatoria no chat (somente imagens salvas em "cats")
-    if message.content.lower() == "!cat":
-        number = random.randint(1,10)
-        file_path = f'cats/gato_icon{number}.jpg'
-        # Envia a imagem como anexo
-        with open(file_path, 'rb') as file:
-            await message.channel.send(file=discord.File(file))
-
-#comando para mandar uma imagem de cachorro aleatoria no chat (Faz uso de uma API)
+#comando para mandar uma imagem de cachorro aleatoria no chat (Via requisição web)
     if message.content.lower() == "!dog":
         response = requests.get("https://dog.ceo/api/breeds/image/random")
         image = response.json()['message']
         await message.channel.send(image)
 
-    if message.content.lower() == "!teste":
+#comando para mandar uma imagem de gatinho aleatoria no chat (Via requisição web)
+    if message.content.lower() == "!cat":
         response = requests.get("https://api.thecatapi.com/v1/images/search")
-        json_data = response.json()
-        
-        if json_data:  # Verifica se a resposta contém dados
-            cat = json_data[0]
-            url = cat.get('url')
-            await message.channel.send(url)
+        # Faz uma requisição GET para a API TheCatAPI para obter uma imagem de gato
+        json_data = response.json() # Converte a resposta da requisição em um objeto JSON
+        if json_data: # Verifica se a resposta contém dados
+            cat = json_data[0] # Acessa o primeiro objeto da lista de dados
+            url = cat.get('url') # Obtém o valor do campo 'url' do objeto 'cat'
+            await message.channel.send(url) # Envia a URL da imagem do gato no canal de mensagem do Discord
         else:
-            await message.channel.send("Não foi possível obter a URL da imagem do gato.")
+            await message.channel.send("Não foi possível obter a URL da imagem do gato.") # Envia uma mensagem informando que não foi possível obter a URL da imagem do gato
+
 client.run(TOKEN) # inicia o Bot
 
