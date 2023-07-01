@@ -1,0 +1,3 @@
+## Bot para discord
+em desenvolvimento....
+iefoiefjoefijeoifjse
