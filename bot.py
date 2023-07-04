@@ -38,6 +38,4 @@ async def dog(interaction: discord.Interaction):
 async def info(interaction: discord.Interaction):
     await interaction.response.send_message(f"Olá, {interaction.user.name} Consigo gerar imagens de bichinhos para você!! Aproveite", ephemeral = False)
 
-
-
 bot.run(TOKEN)

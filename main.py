@@ -11,6 +11,7 @@ client = discord.Client(intents=intents)
 
 TOKEN = token.get('TOKEN') #aloca o token do meu bot na constante TOKEN
 
+
 @client.event
 async def on_ready():
     print(f'{client.user} ficou online') #mensagem de quando o bot ficar online
@@ -18,7 +19,6 @@ async def on_ready():
 # @client.tree.command(name="hello")
 # async def hello(interaction: discord.Interaction):
 #     await interaction.response.send_message(f"Hey {interaction.user.mention}! This is a slash command!", ephemeral=True)
-
 
 @client.event
 async def on_message(message):
