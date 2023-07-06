@@ -38,9 +38,19 @@ async def dog(interaction: discord.Interaction):
 async def fox(interaction: discord.Interaction):
     response = requests.get("https://randomfox.ca/floof")
     json_data = response.json()
-    fox = json_data[0]
+    fox = json_data
     image = fox.get('image')
     await interaction.response.send_message(image, ephemeral = False)
+
+@bot.tree.command(name = "duck")
+async def duck(interaction: discord.Interaction):
+        response = requests.get("https://random-d.uk/api/random") # requisição web para uma API de patos
+        json_data = response.json() # Converte a resposta da requisição em um objeto JSON
+        if json_data: # Verifica se a resposta contém dados
+            image = json_data['url'] # Obtém a URL da foto do pato a partir da resposta da API
+            await interaction.response.send_message(image, ephemeral = False) # Envia a URL da imagem do gato no canal de mensagem do Discord
+        else:
+            await interaction.response.send_message("Não encontrei nenhum gatinho </3)", ephemeral = False) # Envia uma mensagem informando que não foi possível obter a URL da imagem do gato
 
 @bot.tree.command(name = "info")
 async def info(interaction: discord.Interaction):
