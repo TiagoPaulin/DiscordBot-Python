@@ -34,6 +34,14 @@ async def dog(interaction: discord.Interaction):
         image = response.json()['message'] # Converte a resposta da requisição em um objeto JSON e obtém o valor do campo 'message', que contém a URL da imagem
         await interaction.response.send_message(image, ephemeral = False) # Envia a URL da imagem do cachorro no canal de mensagem do Discord
 
+@bot.tree.command(name = "fox")
+async def fox(interaction: discord.Interaction):
+    response = requests.get("https://randomfox.ca/floof")
+    json_data = response.json()
+    fox = json_data[0]
+    image = fox.get('image')
+    await interaction.response.send_message(image, ephemeral = False)
+
 @bot.tree.command(name = "info")
 async def info(interaction: discord.Interaction):
     await interaction.response.send_message(f"Olá, {interaction.user.name} Consigo gerar imagens de bichinhos para você!! Aproveite", ephemeral = False)
