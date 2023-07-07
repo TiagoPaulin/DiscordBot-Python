@@ -6,7 +6,10 @@ from key import token
 
 TOKEN = token.get('TOKEN') # importa o token do bot presente no arquivo "key"
 
-bot = commands.Bot(command_prefix = "!", intents = discord.Intents.all())
+intents = discord.Intents.all()
+intents.members = True
+
+bot = commands.Bot(command_prefix = "!", intents = intents)
 
 # Função de inicialização
 @bot.event
@@ -17,6 +20,12 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
+
+# Função de mensagem de boas vindas no servidor
+@bot.event
+async def on_member_join(member):
+    channel = bot.get_channel(1110730791056576624) # definindo o canal em que a mensagem sera enviada pelo ID do canal
+    await channel.send(f"Bem-vindo {member.mention}! Posso gerar imagens de bichinhos para você, Aproveite!! <3") # mensagem de boas vindas
 
 # Comando de enviar fotos de gatos no chat
 @bot.tree.command(name = "cat")
